@@ -1,4 +1,0 @@
-My name:[SUPRIYA S S ]
-I am learning Git and GitHub
-This is my practice file
-Date: [10/02/26]
