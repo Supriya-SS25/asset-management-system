@@ -1,0 +1,10 @@
+# AssetTrack Pro - Docker Compose
+# Task #3 - Docker Containerization
+
+version: '3.8'
+
+services:
+  assettrack-app:
+    build: .
+    container_name: assettrack-helloworld
+    restart: unless-stopped
