@@ -1,0 +1,124 @@
+# AssetTrack Pro - API Design Sheet
+# Task #5 - API Realization & Documentation
+
+## User Management Endpoints
+1. POST /api/users - Add new employee
+   - Request: {name, email, role, department_id}
+   - Response: {id, name, email, role, department_id, created_at}
+   - Database: INSERT into users table
+
+2. GET /api/users - View all employees
+   - Response: [{id, name, email, role, department_id, created_at}]
+   - Database: SELECT all from users table
+
+3. GET /api/users/{id} - View single employee
+   - Response: {id, name, email, role, department_id, created_at}
+   - Database: SELECT from users table where id = {id}
+
+4. PUT /api/users/{id} - Update employee details
+   - Request: {name, email, role, department_id}
+   - Response: {id, name, email, role, department_id, updated_at}
+   - Database: UPDATE users table where id = {id}
+
+5. DELETE /api/users/{id} - Delete employee
+   - Response: {message: "Employee deleted successfully"}
+   - Database: DELETE from users table where id = {id}
+
+## Asset Management Endpoints
+6. POST /api/assets - Add new asset
+   - Request: {name, serial_number, category, status, purchase_date}
+   - Response: {id, name, serial_number, category, status, purchase_date, created_at}
+   - Database: INSERT into assets table
+
+7. GET /api/assets - View all assets
+   - Response: [{id, name, serial_number, category, status, purchase_date, created_at}]
+   - Database: SELECT all from assets table
+
+8. GET /api/assets/{id} - View single asset
+   - Response: {id, name, serial_number, category, status, purchase_date, created_at}
+   - Database: SELECT from assets table where id = {id}
+
+9. PUT /api/assets/{id} - Update asset details
+   - Request: {name, serial_number, category, status, purchase_date}
+   - Response: {id, name, serial_number, category, status, purchase_date, updated_at}
+   - Database: UPDATE assets table where id = {id}
+
+10. DELETE /api/assets/{id} - Delete asset
+    - Response: {message: "Asset deleted successfully"}
+    - Database: DELETE from assets table where id = {id}
+
+## Asset Assignment Endpoints
+11. POST /api/assignments - Assign asset to employee
+    - Request: {user_id, asset_id, assigned_date, due_date}
+    - Response: {id, user_id, asset_id, assigned_date, due_date, status}
+    - Database: INSERT into assignments table
+
+12. GET /api/users/{id}/assignments - View employee asset history
+    - Response: [{id, user_id, asset_id, assigned_date, returned_date, status}]
+    - Database: SELECT from assignments table where user_id = {id}
+
+13. GET /api/assets/{id}/assignments - View asset assignment history
+    - Response: [{id, user_id, asset_id, assigned_date, returned_date, status}]
+    - Database: SELECT from assignments table where asset_id = {id}
+
+14. PUT /api/assignments/{id} - Return asset from employee
+    - Request: {returned_date, return_condition}
+    - Response: {id, user_id, asset_id, returned_date, return_condition}
+    - Database: UPDATE assignments table where id = {id}
+
+15. PUT /api/assets/{id}/status - Mark asset as broken
+    - Request: {status, notes}
+    - Response: {id, status, notes, updated_at}
+    - Database: UPDATE assets table where id = {id}
+
+## Department Management Endpoints
+16. POST /api/departments - Add new department
+    - Request: {name, description}
+    - Response: {id, name, description, created_at}
+    - Database: INSERT into departments table
+
+17. GET /api/departments - View all departments
+    - Response: [{id, name, description, created_at}]
+    - Database: SELECT all from departments table
+
+18. GET /api/departments/{id} - View single department
+    - Response: {id, name, description, created_at}
+    - Database: SELECT from departments table where id = {id}
+
+## Authentication Endpoints
+19. POST /api/auth/register - User registration
+    - Request: {name, email, password, role}
+    - Response: {id, name, email, role, token}
+    - Database: INSERT into users table
+
+20. POST /api/auth/login - User login
+    - Request: {email, password}
+    - Response: {id, name, email, role, token}
+    - Database: SELECT from users table where email = {email}
+
+21. POST /api/auth/logout - User logout
+    - Request: {token}
+    - Response: {message: "Logged out successfully"}
+    - Database: UPDATE users table to clear session
+
+## Dashboard Endpoints
+22. GET /api/dashboard/stats - Dashboard statistics
+    - Response: {total_assets, assigned_assets, available_assets, total_employees}
+    - Database: Multiple SELECT queries for counts
+
+## Search & Filter Endpoints
+23. GET /api/assets/search - Search assets
+    - Request: {query, search_by}
+    - Response: [{id, name, serial_number, category, status}]
+    - Database: SELECT from assets table with WHERE conditions
+
+24. GET /api/assets/filter - Filter assets
+    - Request: {category, status, department_id}
+    - Response: [{id, name, serial_number, category, status}]
+    - Database: SELECT from assets table with WHERE conditions
+
+## Reporting Endpoints
+25. GET /api/reports/assets - Generate asset report
+    - Request: {format, date_range}
+    - Response: {report_data, generated_at}
+    - Database: Multiple SELECT queries for report data
