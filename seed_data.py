@@ -50,15 +50,6 @@ def seed_assets():
             image_url="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&q=80&w=800",
             status=database_models.AssetStatusEnum.available,
             assigned_user_id=None
-        ),
-        database_models.Asset(
-            asset_name="Herman Miller Aeron Chair",
-            category="Furniture",
-            purchase_date=date(2024, 11, 24),
-            cost=1200.00,
-            image_url="https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&q=80&w=800",
-            status=database_models.AssetStatusEnum.in_use,
-            assigned_user_id=admin.id if admin else None
         )
     ]
 

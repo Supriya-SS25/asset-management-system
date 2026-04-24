@@ -14,6 +14,13 @@ try:
 except Exception:
     pass
 
+try:
+    with engine.connect() as conn:
+        conn.execute(text("DELETE FROM assets WHERE category = 'Furniture';"))
+        conn.commit()
+except Exception:
+    pass
+
 # --- AUTO SEED STABLE ADMIN & DEMO DATA ---
 from database import SessionLocal
 import security
