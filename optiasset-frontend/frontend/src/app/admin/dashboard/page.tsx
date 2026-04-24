@@ -14,6 +14,7 @@ type Asset = {
   status: string;
   assigned_user_id: number | null;
   purchase_date: string;
+  image_url: string | null;
 }
 
 export default function AdminDashboardPage() {
@@ -51,47 +52,7 @@ export default function AdminDashboardPage() {
     }
   }, [isAuthenticated, user, router]);
 
-    const getCategoryImage = (category: string, id: number) => {
-      const laptops = [
-        "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=800",
-        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&q=80&w=800",
-        "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&q=80&w=800",
-        "https://images.unsplash.com/photo-1531297172864-822d10bf0d21?auto=format&fit=crop&q=80&w=800"
-      ];
-      const phones = [
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80&w=800",
-        "https://images.unsplash.com/photo-1523206489230-c012c64b2b48?auto=format&fit=crop&q=80&w=800",
-        "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&q=80&w=800"
-      ];
-      const tablets = [
-        "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&q=80&w=800",
-        "https://images.unsplash.com/photo-1561154464-82e9adf32764?auto=format&fit=crop&q=80&w=800"
-      ];
-      const printers = [
-        "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&q=80&w=800",
-        "https://images.unsplash.com/photo-1588607380962-421715871bfa?auto=format&fit=crop&q=80&w=800"
-      ];
-      const headphones = [
-         "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=800",
-         "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&q=80&w=800"
-      ];
-      const monitors = [
-         "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&q=80&w=800",
-         "https://images.unsplash.com/photo-1616450849187-5c26b681498b?auto=format&fit=crop&q=80&w=800"
-      ];
-      
-      const getImg = (arr: string[]) => arr[id % arr.length];
 
-      switch (category.toLowerCase()) {
-          case "laptop": return getImg(laptops);
-          case "phone": case "mobile": return getImg(phones);
-          case "monitor": return getImg(monitors);
-          case "headphones": case "headphone": case "audio": return getImg(headphones);
-          case "tablet": case "tab": return getImg(tablets);
-          case "printer": return getImg(printers);
-          default: return "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800";
-      }
-    };
 
   if (!isAuthenticated || !user || user.userRole !== "admin") {
      return <div className="min-h-screen bg-[#141414] flex items-center justify-center text-white">Loading Admin Profile...</div>;
@@ -169,7 +130,7 @@ export default function AdminDashboardPage() {
                 {assets.map(asset => (
                   <div key={asset.id} className="relative group rounded-md bg-[#232323] overflow-hidden card-hover border border-white/5">
                      <div className="aspect-video w-full overflow-hidden relative">
-                       <img src={getCategoryImage(asset.category, asset.id)} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                       <img src={asset.image_url || "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800"} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                        <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent opacity-80"></div>
                      </div>
                      <div className="p-4 relative z-10">

@@ -20,6 +20,7 @@ def seed_assets():
             category="Laptop",
             purchase_date=date(2025, 1, 15),
             cost=3499.00,
+            image_url="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=800",
             status=database_models.AssetStatusEnum.in_use,
             assigned_user_id=employee.id if employee else None
         ),
@@ -28,6 +29,7 @@ def seed_assets():
             category="Monitor",
             purchase_date=date(2025, 2, 10),
             cost=899.99,
+            image_url="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&q=80&w=800",
             status=database_models.AssetStatusEnum.assigned,
             assigned_user_id=employee.id if employee else None
         ),
@@ -36,6 +38,7 @@ def seed_assets():
             category="Phone",
             purchase_date=date(2025, 6, 20),
             cost=1199.00,
+            image_url="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80&w=800",
             status=database_models.AssetStatusEnum.maintenance,
             assigned_user_id=None
         ),
@@ -44,6 +47,7 @@ def seed_assets():
             category="Laptop",
             purchase_date=date(2025, 8, 5),
             cost=1750.00,
+            image_url="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&q=80&w=800",
             status=database_models.AssetStatusEnum.available,
             assigned_user_id=None
         ),
@@ -52,6 +56,7 @@ def seed_assets():
             category="Furniture",
             purchase_date=date(2024, 11, 24),
             cost=1200.00,
+            image_url="https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&q=80&w=800",
             status=database_models.AssetStatusEnum.in_use,
             assigned_user_id=admin.id if admin else None
         )

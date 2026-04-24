@@ -14,7 +14,7 @@ if not database_url:
 if database_url and database_url.startswith("postgres://"):
     database_url = database_url.replace("postgres://", "postgresql://", 1)
 
-print(f"🔧 Database connection initialized. Using database type: {'SQLite' if 'sqlite' in database_url else 'PostgreSQL'}")
+print(f"Database connection initialized. Using database type: {'SQLite' if 'sqlite' in database_url else 'PostgreSQL'}")
 
 # For SQLite, we need connect_args={"check_same_thread": False}
 if database_url.startswith("sqlite"):

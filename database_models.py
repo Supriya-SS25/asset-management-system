@@ -41,6 +41,7 @@ class Asset(Base):
     category = Column(String, index=True)
     purchase_date = Column(Date)
     cost = Column(Float)
+    image_url = Column(String, nullable=True)
     status = Column(String, default=AssetStatusEnum.available)
     assigned_user_id = Column(Integer, ForeignKey("users.id"), nullable=True)
 

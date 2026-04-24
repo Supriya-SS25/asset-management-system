@@ -14,6 +14,7 @@ export default function AssetsPage() {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("Laptop");
   const [cost, setCost] = useState(""); 
+  const [imageUrl, setImageUrl] = useState(""); 
 
 
   const loadData = async () => {
@@ -49,6 +50,7 @@ export default function AssetsPage() {
         asset_name: name,
         category: category,
         cost: parseFloat(cost),
+        image_url: imageUrl || null,
         status: "available"
     };
     
@@ -62,6 +64,7 @@ export default function AssetsPage() {
         setName("");
         setCategory("Laptop");
         setCost(""); 
+        setImageUrl("");
         loadData(); // reload
       }
     } catch (err) {
@@ -114,6 +117,7 @@ export default function AssetsPage() {
                    <option value="Hardware">Other Hardware</option>
                  </select>
                  <input type="number" placeholder="Cost $" value={cost} onChange={e=>setCost(e.target.value)} required className="w-32 bg-[#121212] border border-[#333] p-3 rounded text-white focus:outline-none focus:border-white" />
+                 <input type="url" placeholder="Image URL (optional)" value={imageUrl} onChange={e=>setImageUrl(e.target.value)} className="w-48 bg-[#121212] border border-[#333] p-3 rounded text-white focus:outline-none focus:border-white" />
                  <button type="submit" className="bg-[#333] text-white px-8 py-3 rounded font-semibold hover:bg-[#444] transition">Add Asset</button>
               </form>
           </div>

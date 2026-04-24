@@ -13,6 +13,7 @@ class AssetCreate(BaseModel):
     asset_name: str
     category: str
     cost: float
+    image_url: str | None = None
     status: str = "available"
 
 class AssetAssign(BaseModel):
@@ -32,6 +33,7 @@ def get_assets(db: Session = Depends(get_db), current_user: database_models.User
             "asset_name": asset.asset_name,
             "category": asset.category,
             "cost": asset.cost,
+            "image_url": asset.image_url,
             "status": asset.status,
             "assigned_user_id": asset.assigned_user_id,
             "assigned_user_name": asset.assigned_user.name if asset.assigned_user else None,
