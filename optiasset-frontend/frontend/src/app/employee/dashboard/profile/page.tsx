@@ -41,7 +41,7 @@ export default function ProfilePage() {
             <div>
               <label className="block text-sm font-medium text-gray-500 mb-1">Email Address</label>
               <div className="bg-[#141414] border border-[#333] rounded-md p-3 text-white">
-                {user?.email || "N/A"}
+                {user?.userEmail || "N/A"}
               </div>
             </div>
             <div>
