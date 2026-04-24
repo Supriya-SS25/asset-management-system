@@ -6,6 +6,30 @@ from database import engine
 # Create tables if they don't exist
 database_models.Base.metadata.create_all(bind=engine)
 
+# --- AUTO SEED STABLE ADMIN CREDENTIALS ---
+from database import SessionLocal
+import security
+try:
+    db = SessionLocal()
+    admin_email = "supriyass@123.com"
+    existing_admin = db.query(database_models.User).filter_by(email=admin_email).first()
+    if not existing_admin:
+        new_admin = database_models.User(
+            email=admin_email,
+            name="System Administrator",
+            hashed_password=security.get_password_hash("password123"),
+            role="admin",
+            status="active"
+        )
+        db.add(new_admin)
+        db.commit()
+    elif existing_admin.role != "admin":
+        existing_admin.role = "admin"
+        db.commit()
+finally:
+    db.close()
+# ------------------------------------------
+
 app = FastAPI(
     title="Company Asset Management System API",
     description="Backend API for managing properties, assets and user assignments",
