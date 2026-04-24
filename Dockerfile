@@ -2,7 +2,7 @@
 # Task #3 - Docker Containerization
 
 # Use official Python runtime as base image
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 # Set the working directory
 WORKDIR /app
