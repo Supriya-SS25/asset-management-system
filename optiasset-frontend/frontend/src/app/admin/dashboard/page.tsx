@@ -31,7 +31,7 @@ export default function AdminDashboardPage() {
          return;
       }
       
-      console.log("✅ Admin Dashboard - User authenticated, loading assets");
+      console.log("✅ Admin Dashboard - NEW VERSION DEPLOYED");
       const loadAssets = async () => {
         try {
           const res = await fetchWithAuth("/assets/");
