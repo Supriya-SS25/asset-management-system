@@ -15,9 +15,9 @@ try:
     db = SessionLocal()
     
     # 1. Seed Admin
-    admin_email = "supriyass@123.com"
+    admin_email = "admin@company.com"
     if not db.query(database_models.User).filter_by(email=admin_email).first():
-        db.add(database_models.User(email=admin_email, name="System Administrator", hashed_password=security.get_password_hash("password123"), role="admin", status="active"))
+        db.add(database_models.User(email=admin_email, name="System Administrator", hashed_password=security.get_password_hash("Admin@123"), role="admin", status="active"))
     
     # 2. Seed Employees
     if not db.query(database_models.User).filter_by(email="priya@123.com").first():
