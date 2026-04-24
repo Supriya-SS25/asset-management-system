@@ -1,0 +1,146 @@
+.student-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.student-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.student-card.hovered {
+  border: 2px solid #667eea;
+}
+
+.student-avatar {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.student-avatar img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #f0f0f0;
+}
+
+.student-info {
+  flex: 1;
+  text-align: center;
+}
+
+.student-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.student-grade {
+  font-size: 1rem;
+  color: #667eea;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.student-email {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.3rem;
+}
+
+.student-gpa {
+  font-size: 0.9rem;
+  color: #28a745;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.student-actions {
+  text-align: center;
+}
+
+.student-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+}
+
+.student-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+}
+
+.student-button:active {
+  transform: scale(0.98);
+}
+
+.student-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #28a745;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Card style variations */
+.student-card.premium {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.student-card.premium .student-name,
+.student-card.premium .student-grade,
+.student-card.premium .student-email,
+.student-card.premium .student-gpa {
+  color: white;
+}
+
+.student-card.minimal {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .student-card {
+    margin: 0.5rem;
+    padding: 1rem;
+    min-height: 250px;
+  }
+  
+  .student-avatar img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .student-name {
+    font-size: 1.1rem;
+  }
+  
+  .student-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+}

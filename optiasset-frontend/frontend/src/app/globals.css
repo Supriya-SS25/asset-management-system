@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --color-netflix-red: #E50914;
+  --color-netflix-dark: #141414;
+  --color-netflix-light: #E5E5E5;
+  --color-netflix-gray: #808080;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #141414;
+  color: #E5E5E5;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.cinematic-bg {
+  background: radial-gradient(circle at center, #232323 0%, #141414 100%);
+}
+
+.hero-gradient {
+  background: linear-gradient(0deg, #141414 0%, transparent 100%);
+}
+
+/* Netflix style pop animations */
+.avatar-hover {
+  transition: transform 0.2s ease, outline 0.2s ease;
+}
+.avatar-hover:hover {
+  transform: scale(1.05);
+  outline: 4px solid white;
+}
+
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: scale(1.03) translateY(-5px);
+  box-shadow: 0 10px 40px rgba(229, 9, 20, 0.2);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #141414;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #E50914;
+}

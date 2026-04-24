@@ -10,6 +10,37 @@ DROP TABLE IF EXISTS assets CASCADE;
 DROP TABLE IF EXISTS asset_categories CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS departments CASCADE;
+DROP TABLE IF EXISTS role_permissions CASCADE;
+DROP TABLE IF EXISTS permissions CASCADE;
+DROP TABLE IF EXISTS roles CASCADE;
+
+-- ========================================
+-- RBAC TABLES (Role-Based Access Control)
+-- ========================================
+
+-- Roles Table (Admin, Manager, Employee, etc.)
+CREATE TABLE roles (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Permissions Table (delete:asset, view:inventory, etc.)
+CREATE TABLE permissions (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Role-Permissions Junction Table (Links roles to permissions)
+CREATE TABLE role_permissions (
+    role_id INTEGER REFERENCES roles(id) ON DELETE CASCADE,
+    permission_id INTEGER REFERENCES permissions(id) ON DELETE CASCADE,
+    PRIMARY KEY (role_id, permission_id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 -- ========================================
 -- TABLE CREATION
@@ -32,10 +63,11 @@ CREATE TABLE users (
     phone VARCHAR(20),
     employee_id VARCHAR(20) UNIQUE,
     department_id INTEGER,
-    role VARCHAR(50) DEFAULT 'Employee',
+    role_id INTEGER DEFAULT 2,  -- Foreign key to roles table
     is_active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
 -- Asset Categories Table
@@ -82,7 +114,7 @@ CREATE TABLE asset_assignments (
 -- Maintenance Logs Table
 CREATE TABLE maintenance_logs (
     id SERIAL PRIMARY KEY,
-    asset_id INTEGER NOT NULL,
+    asset_id INTEGER NOT NULL, 
     performed_by INTEGER,
     maintenance_type VARCHAR(100),
     description TEXT,
@@ -178,6 +210,44 @@ INSERT INTO maintenance_logs (asset_id, performed_by, maintenance_type, descript
 (5, 3, 'Screen Replacement', 'Replaced cracked screen', 199.99, '2024-05-15'),
 (10, 3, 'Oil Change', 'Regular vehicle maintenance', 45.00, '2024-04-10'),
 (6, 3, 'Toner Replacement', 'Replaced toner cartridge', 89.99, '2024-06-12');
+
+-- ========================================
+-- RBAC SAMPLE DATA
+-- ========================================
+
+-- Insert Roles (Admin, Manager, Employee)
+INSERT INTO roles (id, name, description) VALUES
+(1, 'Admin', 'Full system access - can manage everything'),
+(2, 'Manager', 'Department-level access - can manage department assets and users'),
+(3, 'Employee', 'Limited access - can only view assigned assets and profile');
+
+-- Insert Permissions
+INSERT INTO permissions (id, name, description) VALUES
+(1, 'delete:asset', 'Can delete assets from inventory'),
+(2, 'create:asset', 'Can create new assets'),
+(3, 'update:asset', 'Can update asset information'),
+(4, 'view:inventory', 'Can view all assets in inventory'),
+(5, 'delete:user', 'Can delete user accounts'),
+(6, 'create:user', 'Can create new user accounts'),
+(7, 'update:user', 'Can update user information'),
+(8, 'view:users', 'Can view all users'),
+(9, 'view:reports', 'Can view system reports'),
+(10, 'view:my_gear', 'Can view own assigned assets'),
+(11, 'update:profile', 'Can update own profile'),
+(12, 'assign:asset', 'Can assign assets to users');
+
+-- Insert Role-Permissions (Link roles to permissions)
+-- Admin gets all permissions
+INSERT INTO role_permissions (role_id, permission_id) VALUES
+(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (1, 12);
+
+-- Manager gets limited permissions
+INSERT INTO role_permissions (role_id, permission_id) VALUES
+(2, 2), (2, 3), (2, 4), (2, 7), (2, 9), (2, 10), (2, 11), (2, 12);
+
+-- Employee gets minimal permissions
+INSERT INTO role_permissions (role_id, permission_id) VALUES
+(3, 10), (3, 11);
 
 -- ========================================
 -- INDEXES FOR PERFORMANCE

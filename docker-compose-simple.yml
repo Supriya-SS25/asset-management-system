@@ -1,0 +1,12 @@
+# AssetTrack Pro - Simple Docker Compose (No Database)
+# Task #5 - API Realization & Documentation
+
+services:
+  assettrack-api:
+    build: .
+    container_name: assettrack-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app

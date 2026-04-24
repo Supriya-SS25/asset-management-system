@@ -1,10 +1,32 @@
 # AssetTrack Pro - Docker Compose
-# Task #3 - Docker Containerization
-
-version: '3.8'
+# Task #5 - API Realization & Documentation
 
 services:
-  assettrack-app:
+  assettrack-api:
     build: .
-    container_name: assettrack-helloworld
+    container_name: assettrack-api
     restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://assettrack_user:assettrack_password@db:5432/assettrack_db
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:13
+    container_name: assettrack-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=assettrack_db
+      - POSTGRES_USER=assettrack_user
+      - POSTGRES_PASSWORD=assettrack_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
