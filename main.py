@@ -6,6 +6,14 @@ from database import engine
 # Create tables if they don't exist
 database_models.Base.metadata.create_all(bind=engine)
 
+from sqlalchemy import text
+try:
+    with engine.connect() as conn:
+        conn.execute(text("ALTER TABLE assets ADD COLUMN image_url VARCHAR;"))
+        conn.commit()
+except Exception:
+    pass
+
 # --- AUTO SEED STABLE ADMIN & DEMO DATA ---
 from database import SessionLocal
 import security
