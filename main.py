@@ -17,6 +17,8 @@ except Exception:
 try:
     with engine.connect() as conn:
         conn.execute(text("DELETE FROM assets WHERE category = 'Furniture';"))
+        conn.execute(text("UPDATE assets SET image_url = 'https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&q=80&w=800' WHERE asset_name LIKE '%MacBook%';"))
+        conn.execute(text("UPDATE assets SET image_url = 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&q=80&w=800' WHERE asset_name LIKE '%Lenovo%';"))
         conn.commit()
 except Exception:
     pass

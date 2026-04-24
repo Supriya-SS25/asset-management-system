@@ -20,7 +20,7 @@ def seed_assets():
             category="Laptop",
             purchase_date=date(2025, 1, 15),
             cost=3499.00,
-            image_url="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=800",
+            image_url="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&q=80&w=800",
             status=database_models.AssetStatusEnum.in_use,
             assigned_user_id=employee.id if employee else None
         ),
@@ -47,7 +47,7 @@ def seed_assets():
             category="Laptop",
             purchase_date=date(2025, 8, 5),
             cost=1750.00,
-            image_url="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&q=80&w=800",
+            image_url="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&q=80&w=800",
             status=database_models.AssetStatusEnum.available,
             assigned_user_id=None
         )
