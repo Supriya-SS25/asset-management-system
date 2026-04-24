@@ -6,26 +6,29 @@ from database import engine
 # Create tables if they don't exist
 database_models.Base.metadata.create_all(bind=engine)
 
-# --- AUTO SEED STABLE ADMIN CREDENTIALS ---
+# --- AUTO SEED STABLE ADMIN & DEMO DATA ---
 from database import SessionLocal
 import security
+import seed_data
+
 try:
     db = SessionLocal()
+    
+    # 1. Seed Admin
     admin_email = "supriyass@123.com"
-    existing_admin = db.query(database_models.User).filter_by(email=admin_email).first()
-    if not existing_admin:
-        new_admin = database_models.User(
-            email=admin_email,
-            name="System Administrator",
-            hashed_password=security.get_password_hash("password123"),
-            role="admin",
-            status="active"
-        )
-        db.add(new_admin)
-        db.commit()
-    elif existing_admin.role != "admin":
-        existing_admin.role = "admin"
-        db.commit()
+    if not db.query(database_models.User).filter_by(email=admin_email).first():
+        db.add(database_models.User(email=admin_email, name="System Administrator", hashed_password=security.get_password_hash("password123"), role="admin", status="active"))
+    
+    # 2. Seed Employees
+    if not db.query(database_models.User).filter_by(email="priya@123.com").first():
+        db.add(database_models.User(email="priya@123.com", name="Priya", hashed_password=security.get_password_hash("password123"), role="employee", status="active"))
+    if not db.query(database_models.User).filter_by(email="alishan@789.com").first():
+        db.add(database_models.User(email="alishan@789.com", name="Alishan", hashed_password=security.get_password_hash("password123"), role="employee", status="active"))
+        
+    db.commit()
+    
+    # 3. Seed Assets
+    seed_data.seed_assets()
 finally:
     db.close()
 # ------------------------------------------
