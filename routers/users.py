@@ -41,11 +41,17 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     hashed_password = get_password_hash(password_to_hash)
     
     # Let the API dictate the role instead of hardcoding "employee" if requested
+    role_to_assign = user.role if user.role in ["admin", "employee"] else "employee"
+    
+    # Automatically grant admin role to known admin emails
+    if normalized_email in ["supriya@123.com", "supriyass@123.com"]:
+        role_to_assign = "admin"
+
     db_user = database_models.User(
         email=normalized_email,
         name=user.name,
         hashed_password=hashed_password,
-        role=user.role if user.role in ["admin", "employee"] else "employee",
+        role=role_to_assign,
         status="active"
     )
     db.add(db_user)
