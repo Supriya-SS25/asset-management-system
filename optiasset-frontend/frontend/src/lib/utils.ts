@@ -43,7 +43,7 @@ export function getAssetImage(asset: { image_url?: string | null, category?: str
     return "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80&w=800";
   }
   if (name.includes('samsung') || name.includes('galaxy') || name.includes('android')) {
-    return "https://images.unsplash.com/photo-1610945264803-c22b6272faa0?auto=format&fit=crop&q=80&w=800"; // Samsung/Android image
+    return "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&q=80&w=800"; // Samsung/Android image
   }
 
   // General Phone Fallback
