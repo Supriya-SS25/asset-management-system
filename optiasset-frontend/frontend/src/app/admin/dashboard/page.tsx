@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Monitor, Laptop, Settings, LogOut, MessageSquare } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
+import { getAssetImage } from "@/lib/utils";
 
 type Asset = {
   id: number;
@@ -130,7 +131,7 @@ export default function AdminDashboardPage() {
                 {assets.map(asset => (
                   <div key={asset.id} className="relative group rounded-md bg-[#232323] overflow-hidden card-hover border border-white/5">
                      <div className="aspect-video w-full overflow-hidden relative">
-                       <img src={asset.image_url || "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800"} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                       <img src={getAssetImage(asset)} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                        <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent opacity-80"></div>
                      </div>
                      <div className="p-4 relative z-10">
