@@ -46,8 +46,13 @@ export function getAssetImage(asset: { image_url?: string | null, category?: str
     return "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&q=80&w=800"; // Samsung/Android image
   }
 
+  // Headphones
+  if (cat.includes('headphone') || name.includes('headphone') || name.includes('earbud') || name.includes('boat')) {
+    return "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=800"; // Headphones image
+  }
+
   // General Phone Fallback
-  if (cat.includes('phone') || cat.includes('mobile')) {
+  if (cat === 'phone' || cat.includes('mobile') || (cat.includes('phone') && !cat.includes('headphone'))) {
     return "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80&w=800";
   }
 
