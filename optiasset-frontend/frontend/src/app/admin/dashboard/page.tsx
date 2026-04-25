@@ -94,7 +94,7 @@ export default function AdminDashboardPage() {
         {/* Professional Header */}
         <div className="bg-[#1e1e1e] border border-[#333] rounded-xl p-8 mb-8 shadow-sm">
            <h1 className="text-3xl font-bold text-white mb-2">
-             Welcome, Administrator {user?.userName}
+             Welcome, Administrator {user?.userName === 'System Administrator' ? 'Supriya' : user?.userName}
            </h1>
            <p className="text-gray-400 text-lg">
              Manage company assets globally and oversee organizational allocation.
