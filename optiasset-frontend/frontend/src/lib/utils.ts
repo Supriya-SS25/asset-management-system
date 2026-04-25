@@ -16,15 +16,42 @@ export function getAssetImage(asset: { image_url?: string | null, category?: str
   if (cat.includes('printer') || name.includes('printer') || name.includes('pixma')) {
     return "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&q=80&w=800";
   }
-  if (cat.includes('laptop') || name.includes('macbook') || name.includes('thinkpad')) {
+  
+  // Specific Laptop Models
+  if (name.includes('macbook') || name.includes('apple') || name.includes('mac')) {
+    return "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&q=80&w=800"; // MacBook image
+  }
+  if (name.includes('thinkpad') || name.includes('lenovo')) {
+    return "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&q=80&w=800"; // Lenovo image
+  }
+  if (name.includes('dell')) {
+    return "https://images.unsplash.com/photo-1593640495253-23196b27a87f?auto=format&fit=crop&q=80&w=800"; // Dell Laptop image
+  }
+  
+  // General Laptop Fallback
+  if (cat.includes('laptop')) {
     return "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&q=80&w=800";
   }
+
+  // Tablets
   if (cat.includes('tablet') || cat.includes('tab') || name.includes('ipad')) {
     return "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&q=80&w=800";
   }
-  if (cat.includes('phone') || cat.includes('mobile') || name.includes('iphone')) {
+
+  // Specific Phones
+  if (name.includes('iphone')) {
     return "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80&w=800";
   }
+  if (name.includes('samsung') || name.includes('galaxy') || name.includes('android')) {
+    return "https://images.unsplash.com/photo-1610945264803-c22b6272faa0?auto=format&fit=crop&q=80&w=800"; // Samsung/Android image
+  }
+
+  // General Phone Fallback
+  if (cat.includes('phone') || cat.includes('mobile')) {
+    return "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80&w=800";
+  }
+
+  // Monitors & Desktops
   if (cat.includes('monitor') || name.includes('display')) {
     return "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&q=80&w=800";
   }
