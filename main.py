@@ -39,8 +39,6 @@ try:
     # 2. Seed Employees
     if not db.query(database_models.User).filter_by(email="priya@123.com").first():
         db.add(database_models.User(email="priya@123.com", name="Priya", hashed_password=security.get_password_hash("password123"), role="employee", status="active"))
-    if not db.query(database_models.User).filter_by(email="alishan@789.com").first():
-        db.add(database_models.User(email="alishan@789.com", name="Alishan", hashed_password=security.get_password_hash("password123"), role="employee", status="active"))
         
     db.commit()
     
